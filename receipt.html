@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cafe receipt</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="receipt-body">
+    <div class="header">
+        <h1>cafe.</h1>
+        <div class="nav">
+            <a href="index.html">menu</a>
+            <a href="receipt.html">receipt</a>
+        </div>
+    </div>
+
+    <div class="receipt-container">
+        <h2 class="whos-order">your order</h2>
+        <input type="text" id="name" placeholder="ur name">
+        <div class="order-list" id="order-list">
+            <p>no items selected</p>
+        </div>
+        
+        <div class="total" id="total-section">
+            <h3>total: $0.00</h3>
+        </div>
+        <h3 class="yummy-msg">yummy!</h3>
+
+        <div class="actions">
+            <button id="confirm-btn">confirm order</button>
+            <div class="payment-section" id="payment-section">
+                <p id="payment-status">select payment method</p>
+                <div class="payment-options">
+                    <button class="payment-btn" data-method="card">credit card</button>
+                    <button class="payment-btn" data-method="cash">cash</button>
+                    <button class="payment-btn" data-method="mobile">mobile pay</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-message" id="final-message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cafe.</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1>cafe</h1>
+        <div class="nav">
+            <a href="index.html">menu</a>
+            <a href="receipt.html">receipt</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>appetizers</h2>
+            <div class="item">
+                <img src="images/wings.png" alt="wings">
+                <div class="item-info">
+                    <h3>buffalo wings</h3>
+                    <p>$8.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="wings">-</button>
+                        <input type="number" class="qty-input" data-item="wings" value="0" min="0">
+                        <button class="plus-btn" data-item="wings">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/nachos.png" alt="nachos">
+                <div class="item-info">
+                    <h3>loaded nachos</h3>
+                    <p>$7.49</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="nachos">-</button>
+                        <input type="number" class="qty-input" data-item="nachos" value="0" min="0">
+                        <button class="plus-btn" data-item="nachos">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/mozzsticks.png" alt="mozzsticks">
+                <div class="item-info">
+                    <h3>mozzarella sticks</h3>
+                    <p>$6.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="mozzsticks">-</button>
+                        <input type="number" class="qty-input" data-item="mozzsticks" value="0" min="0">
+                        <button class="plus-btn" data-item="mozzsticks">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>main course</h2>
+            <div class="item">
+                <img src="images/burger.png" alt="burger">
+                <div class="item-info">
+                    <h3>classic burger</h3>
+                    <p>$12.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="burger">-</button>
+                        <input type="number" class="qty-input" data-item="burger" value="0" min="0">
+                        <button class="plus-btn" data-item="burger">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/pasta.png" alt="pasta">
+                <div class="item-info">
+                    <h3>chicken alfredo</h3>
+                    <p>$14.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="pasta">-</button>
+                        <input type="number" class="qty-input" data-item="pasta" value="0" min="0">
+                        <button class="plus-btn" data-item="pasta">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/pizza.png" alt="pizza">
+                <div class="item-info">
+                    <h3>margherita pizza</h3>
+                    <p>$16.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="pizza">-</button>
+                        <input type="number" class="qty-input" data-item="pizza" value="0" min="0">
+                        <button class="plus-btn" data-item="pizza">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>desserts</h2>
+            <div class="item">
+                <img src="images/cake.png" alt="cake">
+                <div class="item-info">
+                    <h3>chocolate cake</h3>
+                    <p>$5.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="cake">-</button>
+                        <input type="number" class="qty-input" data-item="cake" value="0" min="0">
+                        <button class="plus-btn" data-item="cake">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="images/icecream.png" alt="icecream">
+                <div class="item-info">
+                    <h3>vanilla ice cream</h3>
+                    <p>$3.99</p>
+                    <div class="quantity-controls">
+                        <button class="minus-btn" data-item="icecream">-</button>
+                        <input type="number" class="qty-input" data-item="icecream" value="0" min="0">
+                        <button class="plus-btn" data-item="icecream">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-message" id="error-msg"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
