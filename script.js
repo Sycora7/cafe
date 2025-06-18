@@ -20,14 +20,20 @@ function updateQuantity(item, change) {
         updateItemBorder(item);
     }
     saveOrder();
+    displayOrder();
 }
 
 function updateItemBorder(item) {
-    let itemElement = document.querySelector(`input[data-item="${item}"]`).closest('.item');
-    if (order[item] && order[item] > 0) {
-        itemElement.style.border = '2px solid #03fc90';
-    } else {
-        itemElement.style.border = '1px solid #eee';
+    let itemElement = document.querySelector(`input[data-item="${item}"]`);
+    if (itemElement) {
+        let parentItem = itemElement.closest('.item');
+        if (parentItem) {
+            if (order[item] && order[item] > 0) {
+                parentItem.style.border = '2px solid green';
+            } else {
+                parentItem.style.border = '1px solid #eee';
+            }
+        }
     }
 }
 
@@ -66,19 +72,6 @@ function showError(message) {
     }
 }
 
-
-  const nameInput = document.getElementById("name");
-  const orderHeader = document.querySelector(".whos-order");
-
-  nameInput.addEventListener("input", () => {
-    const name = nameInput.value.trim();
-    if (name) {
-      orderHeader.textContent = `${name}'s order`;
-    } else {
-      orderHeader.textContent = "your order";
-    }
-  });
-
 function displayOrder() {
     let orderList = document.getElementById('order-list');
     let totalSection = document.getElementById('total-section');
@@ -95,7 +88,7 @@ function displayOrder() {
             total += cost;
             let div = document.createElement('div');
             div.className = 'order-item';
-            div.innerHTML = `<span>${names[item]} x${order[item]}</span><span>$${cost.toFixed(2)}</span>`;
+            div.innerHTML = `<span>${names[item]} x${order[item]}</span><span>${cost.toFixed(2)}</span>`;
             orderList.appendChild(div);
         }
     }
@@ -103,13 +96,19 @@ function displayOrder() {
     if (!hasItems) {
         orderList.innerHTML = '<p>no items selected</p>';
     }
-
-    if (total >= 100) {
-        document.querySelector('.yummy-msg').innerHTML = 'um are u sure u wanna spend that much bro';
-        document.querySelector('.yummy-msg').style.color = 'crimson';
-    }
     
-    totalSection.innerHTML = `<h3>total: $${total.toFixed(2)}</h3>`;
+    totalSection.innerHTML = `<h3>total: ${total.toFixed(2)}</h3>`;
+    
+    let yummyMsg = document.querySelector('.yummy-msg');
+    if (yummyMsg) {
+        if (total > 100) {
+            yummyMsg.textContent = "are u sure ur order's getting expensive buddy";
+            yummyMsg.style.color = 'crimson';
+        } else {
+            yummyMsg.textContent = "yummy!";
+            yummyMsg.style.color = '#03fcad';
+        }
+    }
 }
 
 function confirmOrder() {
@@ -125,7 +124,7 @@ function selectPayment(method) {
     
     if (statusText) {
         statusText.textContent = 'payment processed';
-        statusText.style.color = 'aquamarine';
+        statusText.style.color = 'green';
     }
     
     if (finalMessage) {
@@ -134,43 +133,74 @@ function selectPayment(method) {
     }
 }
 
+function updateOrderTitle() {
+    let nameInput = document.getElementById('name');
+    let orderTitle = document.querySelector('.whos-order');
+    if (nameInput && orderTitle) {
+        let name = nameInput.value.trim();
+        if (name) {
+            orderTitle.textContent = name + "'s order";
+        } else {
+            orderTitle.textContent = "your order";
+        }
+    }
+}
+
 window.addEventListener('load', function() {
     loadOrder();
     displayOrder();
     
-    document.querySelectorAll('.plus-btn').forEach(btn => {
-        btn.addEventListener("click", function() {
-            updateQuantity(this.dataset.item, 1);
+    const plusButtons = document.querySelectorAll('.plus-btn');
+    if (plusButtons.length > 0) {
+        plusButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                updateQuantity(this.dataset.item, 1);
+            });
         });
-    });
+    }
     
-    document.querySelectorAll('.minus-btn').forEach(btn => {
-        btn.addEventListener("click", function() {
-            updateQuantity(this.dataset.item, -1);
+    const minusButtons = document.querySelectorAll('.minus-btn');
+    if (minusButtons.length > 0) {
+        minusButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                updateQuantity(this.dataset.item, -1);
+            });
         });
-    });
+    }
     
-    document.querySelectorAll('.qty-input').forEach(input => {
-        input.addEventListener("input", function() {
-            let value = parseInt(this.value) || 0;
-            if (validateInput(this.dataset.item, value)) {
-                order[this.dataset.item] = value;
-                updateItemBorder(this.dataset.item);
-                saveOrder();
-            } else {
-                this.value = order[this.dataset.item] || 0;
-            }
+    const qtyInputs = document.querySelectorAll('.qty-input');
+    if (qtyInputs.length > 0) {
+        qtyInputs.forEach(input => {
+            input.addEventListener("input", function() {
+                let value = parseInt(this.value) || 0;
+                if (validateInput(this.dataset.item, value)) {
+                    order[this.dataset.item] = value;
+                    updateItemBorder(this.dataset.item);
+                    saveOrder();
+                    displayOrder();
+                } else {
+                    this.value = order[this.dataset.item] || 0;
+                }
+            });
         });
-    });
+    }
     
     let confirmBtn = document.getElementById('confirm-btn');
     if (confirmBtn) {
         confirmBtn.addEventListener("click", confirmOrder);
     }
     
-    document.querySelectorAll('.payment-btn').forEach(btn => {
-        btn.addEventListener("click", function() {
-            selectPayment(this.dataset.method);
+    const paymentButtons = document.querySelectorAll('.payment-btn');
+    if (paymentButtons.length > 0) {
+        paymentButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                selectPayment(this.dataset.method);
+            });
         });
-    });
+    }
+    
+    let nameInput = document.getElementById('name');
+    if (nameInput) {
+        nameInput.addEventListener("input", updateOrderTitle);
+    }
 });
